@@ -20,6 +20,13 @@ const cateRouter=require("./router/cate_router.js")
 server.use("/api",accountRouter)
 server.use("/my",userRouter)
 server.use("/my/article",cateRouter)
+// 错误处理中间件用来检测token合法性
+server.use((err,req,res,next)=>{
+    console.log("有错误",err);
+    if(err.name==='UnauthorizedError'){
+        res.status(401).send({code:1,message:"身份认证失败！"})
+    }
+})
 // 开启监听
 server.listen(3000,()=>{
     console.log("服务器已经在3000端口就绪");
