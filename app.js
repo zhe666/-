@@ -7,7 +7,7 @@ server.use(cors())
 server.use('/uploads',express.static('uploads'))
 // 设置jwt  token生成和验证
 const jwt=require("express-jwt")
-server.use(juw({
+server.use(jwt({
     secret:"az66",// 生成token时候的钥匙，必须统一
     algorithms:['HS256']//加密算法
 }).unless({
