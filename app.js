@@ -13,7 +13,13 @@ server.use(juw({
 }).unless({
     path:['/api/login','/api/register', /^\/uploads\/.*/] //除了这两个接口，其他的都需要认证
 }))
-
+// 通过路由中间件来加载不同的路由
+const userRouter=require("./router/user_router.js")
+const accountRouter=require("./router/account_router.js")
+const cateRouter=require("./router/cate_router.js")
+server.use("/api",accountRouter)
+server.use("/my",userRouter)
+server.use("/my/article",cateRouter)
 // 开启监听
 server.listen(3000,()=>{
     console.log("服务器已经在3000端口就绪");
